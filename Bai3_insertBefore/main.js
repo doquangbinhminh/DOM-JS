@@ -1,12 +1,13 @@
 let btn = document.querySelector("#btn");
 let ul = document.querySelector("ul");
-
-//appendChild
-// btn.addEventListener("click", function () {
-//   let addLi = document.createElement("li");
-//   addLi.textContent = "Item 3";
-//   ul.appendChild(addLi);
-// });
+let n = 3;
+// appendChild
+btn.addEventListener("click", function () {
+  let addLi = document.createElement("li");
+  addLi.textContent = `Item ${n}`;
+  ul.appendChild(addLi);
+  n++;
+});
 
 //prepend
 // btn.addEventListener("click", function () {
@@ -16,8 +17,8 @@ let ul = document.querySelector("ul");
 // });
 
 //insertBefore
-btn.addEventListener("click", function () {
-  let addLi = document.createElement("li");
-  addLi.textContent = "Item 3";
-  ul.insertBefore(addLi, ul[1]);
-});
+// btn.addEventListener("click", function () {
+//   let addLi = document.createElement("li");
+//   addLi.textContent = "Item 3";
+//   ul.insertBefore(addLi, ul[1]);
+// });
