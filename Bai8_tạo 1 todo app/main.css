@@ -1,0 +1,78 @@
+body {
+  background-color: rgb(160, 224, 160);
+  width: 100%;
+  height: 100%;
+}
+
+#heading {
+  background-color: black;
+  height: 50px;
+  color: rgb(95, 228, 95);
+  display: flex;
+  align-items: center;
+}
+
+#heading h1 {
+  margin-left: 10px;
+}
+
+#search {
+  background-color: rgb(58, 124, 58);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#search #timKiem {
+  display: block;
+  margin: 0 auto;
+  width: 800px;
+  height: 50px;
+  font-size: 18px;
+  padding: 0 15px;
+  border: 2px solid #ccc;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#add {
+  height: 50px;
+  width: 50px;
+  font-size: 50px;
+  cursor: pointer;
+  background-color: greenyellow;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#list {
+  width: 800px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+#item .check {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+#item li {
+  padding: 10px;
+  width: 800px;
+  background-color: white;
+  list-style: none;
+  font-size: 30px;
+  width: 100%;
+  margin: 10px 0;
+}
