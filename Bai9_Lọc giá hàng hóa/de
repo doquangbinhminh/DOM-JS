@@ -1,0 +1,30 @@
+Tạo 1 danh sách sản phẩm:
+
+Hiển thị danh sách bằng .map()
+Có:
+Ảnh
+Tên
+Giá
+Click nút "Add to cart"
+Nếu đã thêm → đổi thành "Added"
+Có filter:
+All, < 500k, > 500k
+
+let products = [
+  { id: 1, name: "iPhone 11", price: 700, added: false, img: "https://via.placeholder.com/100" },
+  { id: 2, name: "Samsung S21", price: 400, added: false, img: "https://via.placeholder.com/100" },
+  { id: 3, name: "Xiaomi Mi 11", price: 300, added: false, img: "https://via.placeholder.com/100" }
+];
+
+cho đoạn html gốc
+<div class="app">
+  <h2>Product List</h2>
+
+  <div class="filters">
+    <button onclick="setFilter('all')">All</button>
+    <button onclick="setFilter('low')">< 500k</button>
+    <button onclick="setFilter('high')">> 500k</button>
+  </div>
+
+  <ul id="productList"></ul>
+</div>

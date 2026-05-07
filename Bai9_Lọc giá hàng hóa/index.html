@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="app">
+      <h2>Product List</h2>
+
+      <div class="filters">
+        <button class="all" onclick="setFilter('all')">All</button>
+        <button class="low" onclick="setFilter('low')">< 500k</button>
+        <button class="high" onclick="setFilter('high')">> 500k</button>
+      </div>
+
+      <ul id="productList"></ul>
+    </div>
+  </body>
+
+  <script src="main.js"></script>
+</html>

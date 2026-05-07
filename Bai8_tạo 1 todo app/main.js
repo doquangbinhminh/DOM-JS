@@ -22,7 +22,7 @@ button.addEventListener("click", function (e) {
 
   let li = document.createElement("li");
 
-  li.innerHTML = `<input type="checkbox"> ${value}`;
+  li.innerHTML = `<input type="checkbox" class="check"> ${value}`;
 
   ul.appendChild(li);
 
