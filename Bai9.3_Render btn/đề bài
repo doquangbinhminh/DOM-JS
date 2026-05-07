@@ -1,0 +1,10 @@
+cho arr 
+const users = [
+  { id: 1, name: "An", active: false },
+  { id: 2, name: "Bình", active: false },
+  { id: 3, name: "Cường", active: false }
+];
+render ra ba nút 
+user Bình, An, CƯờng
+
+khi nhấn vào nút nào thì console.log ra tên và id của user tương ứng với nút đó

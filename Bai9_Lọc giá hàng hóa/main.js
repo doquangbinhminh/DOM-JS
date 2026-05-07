@@ -135,17 +135,7 @@ function render() {
 
 render();
 
-allBtn.addEventListener("click", function () {
-  currentFilter = "all";
+function setFilter(item) {
+  currentFilter = item;
   render();
-});
-
-lowBtn.addEventListener("click", function () {
-  currentFilter = "low";
-  render();
-});
-
-highBtn.addEventListener("click", function () {
-  currentFilter = "high";
-  render();
-});
+}
