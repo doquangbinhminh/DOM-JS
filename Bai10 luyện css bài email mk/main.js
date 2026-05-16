@@ -11,16 +11,12 @@ btnLogin.addEventListener("click", function () {
 
   if (inputEmail.value.trim() === "") {
     emailError.innerHTML = "Vui lòng nhập email";
-
-    return;
   }
 
-  // emailErrorError.innerHTML = "";
+  // emailError.innerHTML = "";
 
   if (inputPassword.value.trim() === "") {
-    passWordErrorError.innerHTML = "Vui lòng nhập mật khẩu";
-
-    return;
+    passWordError.innerHTML = "Vui lòng nhập mật khẩu";
   }
 
   // passWordError.innerHTML = "";
