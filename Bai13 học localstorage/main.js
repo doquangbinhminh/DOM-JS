@@ -169,12 +169,18 @@ numberCart.innerHTML = count_number_cart;
 // lấy tất cả nút add cart
 let addCart = document.querySelectorAll(".add_cart");
 
-addCart.forEach(function (item) {
+addCart.forEach(function (item, index) {
+  let count = 0;
+
   item.addEventListener("click", function () {
-    count_number_cart++;
+    if (count < products[index].quantity) {
+      count++;
 
-    numberCart.innerHTML = count_number_cart;
-
-    localStorage.setItem("count_number_cart", count_number_cart);
+      count_number_cart++;
+      numberCart.innerHTML = count_number_cart;
+      localStorage.setItem("count_number_cart", count_number_cart);
+    } else {
+      alert("Đã đạt số lượng tối đa của sản phẩm!");
+    }
   });
 });
