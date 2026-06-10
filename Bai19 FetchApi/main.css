@@ -1,0 +1,44 @@
+body {
+  background: #d8a200;
+  font-family: Arial, sans-serif;
+}
+
+.list_user {
+  margin: 40px auto;
+  max-width: 900px;
+}
+
+.product {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Avatar giả */
+.product::after {
+  content: "";
+  width: 90px;
+  height: 110px;
+  background: url("https://i.pravatar.cc/150?img=3") center/cover;
+  position: absolute;
+  left: 25px;
+  z-index: 1;
+}
+
+.product p {
+  margin: 6px 0;
+  margin-left: 140px;
+}
+
+.product p:first-child {
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: uppercase;
+}

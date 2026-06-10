@@ -4,16 +4,28 @@ let btnLogin = document.querySelector(".btn_login");
 let emailError = document.querySelector(".error-email");
 let passWordError = document.querySelector(".error-password");
 
-const users = [
-  {
-    email: "admin@gmail.com",
-    password: "123456",
+const user = {
+  id: "u_1001",
+  username: "nguyenloi",
+  email: "loi.nguyen@example.com",
+  password: "123123123",
+  fullName: "Nguyễn Lợi",
+  avatar: "https://i.pravatar.cc/150?img=1",
+  phone: "0901234567",
+  address: {
+    street: "23 Galaxy 4 Tố Hữu",
+    ward: "Vạn Phúc",
+    district: "Hà Đông",
+    city: "Hà Nội",
+    country: "Vietnam",
   },
-  {
-    email: "user@gmail.com",
-    password: "111111",
-  },
-];
+  role: "admin",
+  status: "active",
+  refreshToken: "abc",
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  lastLoginAt: new Date().toISOString(),
+};
 
 btnLogin.addEventListener("click", function () {
   emailError.innerHTML = "";
@@ -32,11 +44,7 @@ btnLogin.addEventListener("click", function () {
     return;
   }
 
-  let user = users.find(function (item) {
-    return item.email === emailValue;
-  });
-
-  if (!user) {
+  if (user.email !== emailValue) {
     emailError.innerHTML = "Sai email";
     return;
   }
@@ -46,5 +54,7 @@ btnLogin.addEventListener("click", function () {
     return;
   }
 
-  window.location.href = "/Bai12 tao header shopee/";
+  localStorage.setItem("currentUser", JSON.stringify(user));
+
+  window.location.href = "/Bai13 học localstorage/";
 });

@@ -161,36 +161,75 @@ let product = products.map(function (item) {
 
 ulProduct.innerHTML = product.join("");
 
-// cart
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-// tính tổng cart
-let total = 0;
 
-cart.forEach(function (item) {
-  total += item.quantity;
-});
+function updateCartCount() {
+  let total = 0;
 
-numberCart.innerHTML = total;
-// lấy tất cả nút add cart
+  cart.forEach(function (item) {
+    total += item.quantity;
+  });
+
+  numberCart.innerHTML = total;
+}
+
+updateCartCount();
+
+// render dropdown cart
+let openInCart = document.querySelector(".open_in_cart_shopee");
+
+function renderCart() {
+  let html = cart.map(function (item) {
+    return `
+      <div class="in_cart_shopee">
+        <div class="cart_item">
+          <img
+            class="img_in_cart_shoppe"
+            src="${item.img}"
+            alt=""
+          />
+
+          <div class="product_info">
+            <p class="title_product_info">${item.name}</p>
+            <p class="price_product_info">${item.price}.000đ</p>
+          </div>
+
+          <input
+            type="number"
+            min="1"
+            value="${item.quantity}"
+            onchange="changeNumber(${item.id}, this.value)"
+          />
+        </div>
+      </div>
+    `;
+  });
+
+  openInCart.innerHTML = html.join("");
+}
+
+renderCart();
+
+// add cart
 let addCart = document.querySelectorAll(".add_cart");
 
 addCart.forEach(function (item, index) {
   item.addEventListener("click", function () {
     let product = products[index];
-    // tìm sản phẩm trong cart
+
     let findProduct = cart.find(function (cartItem) {
       return cartItem.id === product.id;
     });
 
-    // chưa có sản phẩm
     if (!findProduct) {
       cart.push({
         id: product.id,
+        name: product.name,
+        img: product.img,
+        price: product.price,
         quantity: 1,
       });
     } else {
-      // check max quantity
       if (findProduct.quantity < product.quantity) {
         findProduct.quantity++;
       } else {
@@ -199,17 +238,103 @@ addCart.forEach(function (item, index) {
       }
     }
 
-    // tính tổng cart
-    let total = 0;
-
-    cart.forEach(function (item) {
-      total += item.quantity;
-    });
-
-    numberCart.innerHTML = total;
-
-    // lưu localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
-    console.log(cart);
+
+    updateCartCount();
+    renderCart();
   });
+});
+
+function changeNumber(id, value) {
+  let cartItem = cart.find(function (item) {
+    return item.id === id;
+  });
+
+  let product = products.find(function (item) {
+    return item.id === id;
+  });
+
+  value = Number(value);
+
+  if (value > product.quantity) {
+    alert(`Tối đa chỉ được ${product.quantity} sản phẩm`);
+
+    cartItem.quantity = product.quantity;
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    renderCart();
+    updateCartCount();
+
+    return;
+  }
+
+  cartItem.quantity = value;
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  updateCartCount();
+}
+// mở đóng dropdown
+let iconCartShopee = document.querySelector(".icon_cart_shopee");
+
+iconCartShopee.addEventListener("click", function () {
+  if (getComputedStyle(openInCart).display === "none") {
+    openInCart.style.display = "block";
+  } else {
+    openInCart.style.display = "none";
+  }
+});
+
+let changeIconUser = document.querySelector(".change_icon_user");
+
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if (!currentUser) {
+  changeIconUser.innerHTML = `
+    <a href="/Bai10 luyện css bài email mk/">Đăng nhập</a>
+    <a href="/Bai11 đăng ký shopee/index.html">Đăng ký</a>
+  `;
+} else {
+  changeIconUser.innerHTML = `
+
+  <div class="user-menu">
+   <img
+      class="img_icon_user"
+      src="${currentUser.avatar}"
+      alt="${currentUser.fullName}"
+    />
+    
+     <div class="dropdown">
+            <a><i class="fa-regular fa-user"></i> View Profile</a>
+            <a><i class="fa-solid fa-chart-column"></i> Analytics & Data</a>
+            <a><i class="fa-regular fa-circle-question"></i> Help Center</a>
+            <a><i class="fa-solid fa-gear"></i> Account Settings</a>
+            <a><i class="fa-regular fa-star"></i> Upgrade Plan</a>
+            <a><i class="fa-regular fa-moon"></i> Dark Mode</a>
+            <a class="log_out"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
+     </div>
+  </div>
+   
+           
+  `;
+}
+
+let avatar = document.querySelector(".img_icon_user");
+let dropdown = document.querySelector(".dropdown");
+
+avatar.addEventListener("click", function () {
+  if (getComputedStyle(dropdown).display === "none") {
+    dropdown.style.display = "block";
+  } else {
+    dropdown.style.display = "none";
+  }
+});
+
+// Đăng xuất
+let logOut = document.querySelector(".log_out");
+
+logOut.addEventListener("click", function () {
+  localStorage.removeItem("currentUser");
+  location.reload();
 });
