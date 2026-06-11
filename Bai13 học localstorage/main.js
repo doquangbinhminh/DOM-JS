@@ -341,12 +341,15 @@ if (avatar && dropdown) {
 }
 
 // Đăng xuất
+
 let logOut = document.querySelector(".log_out");
 
-logOut.addEventListener("click", function () {
-  localStorage.removeItem("currentUser");
-  location.reload();
-});
+if (logOut) {
+  logOut.addEventListener("click", function () {
+    localStorage.removeItem("currentUser");
+    location.reload();
+  });
+}
 
 // Tìm kiếm shoppe
 
