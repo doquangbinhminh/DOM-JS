@@ -96,70 +96,76 @@ let products = [
 ];
 
 // render product
-let product = products.map(function (item) {
-  return `
-    <div class="in_product">
+// ===== Render Product =====
+function renderProducts(data) {
+  let html = data.map(function (item) {
+    return `
+      <div class="in_product">
 
-      <img
-        class="img_in_product"
-        src="${item.img}"
-        alt=""
-      />
+        <img
+          class="img_in_product"
+          src="${item.img}"
+          alt=""
+        />
 
-      <div class="price_in_product">
-        <p class="price">${item.price}.000đ</p>
+        <div class="price_in_product">
+          <p class="price">${item.price}.000đ</p>
 
-        <p class="persen">-8%</p>
+          <p class="persen">-8%</p>
 
-        <p class="sold_product">
-          ${item.quantity} đã bán
+          <p class="sold_product">
+            ${item.quantity} đã bán
+          </p>
+
+          <div class="heart_icon">❤</div>
+        </div>
+
+        <p class="title_in_product">
+          ${item.name}
         </p>
 
-        <div class="heart_icon">❤</div>
+        <div class="voucher_in_product">
+          <p class="title_voucher">Giảm 20kđ</p>
+
+          <p class="Cod">Cod</p>
+        </div>
+
+        <div class="time_shopee">
+          Nhận từ 4 Giờ
+        </div>
+
+        <div class="review_product">
+          <p class="star">
+            5.0
+            <i class="fa-solid fa-star star_icon"></i>
+          </p>
+
+          <p class="quantity">Product (30)</p>
+
+          <p class="followers">
+            Shop Followers (318)
+          </p>
+        </div>
+
+        <div class="bottom_product">
+          <i class="fa-regular fa-message icon_message"></i>
+
+          <i class="fa-solid fa-cart-plus add_cart"></i>
+
+          <p class="btn_buy">
+            Mua cùng Voucher 240.000đ
+          </p>
+        </div>
+
       </div>
+    `;
+  });
 
-      <p class="title_in_product">
-        ${item.name}
-      </p>
+  ulProduct.innerHTML = html.join("");
+}
 
-      <div class="voucher_in_product">
-        <p class="title_voucher">Giảm 20kđ</p>
-
-        <p class="Cod">Cod</p>
-      </div>
-
-      <div class="time_shopee">
-        Nhận từ 4 Giờ
-      </div>
-
-      <div class="review_product">
-        <p class="star">
-          5.0
-          <i class="fa-solid fa-star star_icon"></i>
-        </p>
-
-        <p class="quantity">Product (30)</p>
-
-        <p class="followers">
-          Shop Followers (318)
-        </p>
-      </div>
-
-      <div class="bottom_product">
-        <i class="fa-regular fa-message icon_message"></i>
-
-        <i class="fa-solid fa-cart-plus add_cart"></i>
-
-        <p class="btn_buy">
-          Mua cùng Voucher 240.000đ
-        </p>
-      </div>
-
-    </div>
-  `;
-});
-
-ulProduct.innerHTML = product.join("");
+// Render lần đầu
+renderProducts(products);
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -178,6 +184,7 @@ updateCartCount();
 // render dropdown cart
 let openInCart = document.querySelector(".open_in_cart_shopee");
 
+// render sản phẩm
 function renderCart() {
   let html = cart.map(function (item) {
     return `
@@ -323,13 +330,15 @@ if (!currentUser) {
 let avatar = document.querySelector(".img_icon_user");
 let dropdown = document.querySelector(".dropdown");
 
-avatar.addEventListener("click", function () {
-  if (getComputedStyle(dropdown).display === "none") {
-    dropdown.style.display = "block";
-  } else {
-    dropdown.style.display = "none";
-  }
-});
+if (avatar && dropdown) {
+  avatar.addEventListener("click", function () {
+    if (getComputedStyle(dropdown).display === "none") {
+      dropdown.style.display = "block";
+    } else {
+      dropdown.style.display = "none";
+    }
+  });
+}
 
 // Đăng xuất
 let logOut = document.querySelector(".log_out");
@@ -337,4 +346,24 @@ let logOut = document.querySelector(".log_out");
 logOut.addEventListener("click", function () {
   localStorage.removeItem("currentUser");
   location.reload();
+});
+
+// Tìm kiếm shoppe
+
+let searchShopee = document.querySelector(".input_search_shopee input");
+let btnSearchShopee = document.querySelector(".btn_search_shopee");
+
+btnSearchShopee.addEventListener("click", function () {
+  let keyword = searchShopee.value.trim().toLowerCase();
+
+  if (keyword === "") {
+    renderProducts(products);
+    return;
+  }
+
+  let findSearch = products.filter(function (item) {
+    return item.name.toLowerCase().includes(keyword);
+  });
+
+  renderProducts(findSearch);
 });
