@@ -183,36 +183,54 @@ updateCartCount();
 
 // render dropdown cart
 let openInCart = document.querySelector(".open_in_cart_shopee");
-
+let cartContent = document.querySelector(".cart_content");
 // render sản phẩm
 function renderCart() {
   let html = cart.map(function (item) {
     return `
-      <div class="in_cart_shopee">
-        <div class="cart_item">
-          <img
-            class="img_in_cart_shoppe"
-            src="${item.img}"
-            alt=""
-          />
+      <div class="cart_item">
 
-          <div class="product_info">
-            <p class="title_product_info">${item.name}</p>
-            <p class="price_product_info">${item.price}.000đ</p>
-          </div>
+  <input type="checkbox">
 
-          <input
-            type="number"
-            min="1"
-            value="${item.quantity}"
-            onchange="changeNumber(${item.id}, this.value)"
-          />
-        </div>
-      </div>
+  <img
+    class="img_in_cart_shoppe"
+    src="${item.img}"
+    alt=""
+  />
+
+  <div class="product_info">
+    <p class="title_product_info">${item.name}</p>
+  </div>
+
+  <div class="price_product_info">
+    ${item.price}.000đ
+  </div>
+
+  <div class="quantity_product">
+    <input
+      type="number"
+      min="1"
+      value="${item.quantity}"
+      onchange="changeNumber(${item.id}, this.value)"
+    />
+  </div>
+
+  <div class="total_product">
+    ${(item.price * item.quantity).toLocaleString()},000đ
+  </div>
+
+  <div
+    class="delete_item"
+    onclick="deleteCart(${item.id})"
+  >
+    Xóa
+  </div>
+
+</div>
     `;
   });
 
-  openInCart.innerHTML = html.join("");
+  cartContent.innerHTML = html.join("");
 }
 
 renderCart();
@@ -369,4 +387,10 @@ btnSearchShopee.addEventListener("click", function () {
   });
 
   renderProducts(findSearch);
+});
+
+// Xóa cart bằng dấu X
+let closeCart = document.querySelector(".close_cart");
+closeCart.addEventListener("click", function () {
+  openInCart.style.display = "none";
 });
